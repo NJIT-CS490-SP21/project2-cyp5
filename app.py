@@ -29,16 +29,6 @@ def on_connect():
 def on_disconnect():
     print('User disconnected!')
 
-# When a client emits the event 'chat' to the server, this function is run
-# 'chat' is a custom event name that we just decided
-'''@socketio.on('chat')
-def on_chat(data): # data is whatever arg you pass in your emit call on client
-    print(str(data))
-    # This emits the 'chat' event from the server to all clients except for
-    # the client that emmitted the event that triggered this function
-    socketio.emit('chat',  data, broadcast=True, include_self=False)
-'''
-
 @socketio.on('ticTac')
 def ticTac(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
@@ -46,14 +36,9 @@ def ticTac(data): # data is whatever arg you pass in your emit call on client
     # the client that emmitted the event that triggered this function
     socketio.emit('ticTac', data, broadcast=True, include_self=False)
 
-
-
 # Note that we don't call app.run anymore. We call socketio.run with app arg
 socketio.run(
     app,
     host=os.getenv('IP', '0.0.0.0'),
     port=8081 if os.getenv('C9_PORT') else int(os.getenv('PORT', 8081)),
 )
-
-
-

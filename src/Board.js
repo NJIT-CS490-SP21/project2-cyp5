@@ -27,6 +27,11 @@ export function Board() {
       let array = [...board];
       array[props.name] = tic;
       setBoard(array);
+      const winner = calculateWinner(board)
+      function getStatus(){
+      if (winner) {
+      return "Winner: " + winner;
+    }}
       socket.emit('ticTac', { position: props.name });
   }
     return (<div class="box" onClick={toggleText}>{board[props.name]}</div>);
@@ -53,7 +58,35 @@ export function Board() {
     });
   }, [board]);
   
+   //function that calculates the winner
+  function calculateWinner(squares) {
+    //get our set of winning combinations
+    const winningLines = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6]
+      ];
+      //looping through this set
+      for (let i = 0; i < winningLines.length; i++){
+        //check to see if values in our square array fulfill the winning requirements
+        const [a,b,c] = winningLines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]){
+          //if so return X or O
+          return squares[a];
+        }
+      }
+      //else return nothing
+      return null;
+  }
+  
   return (
+    <div>
+    <h1> Tic Tac Toe React </h1>
     <div class="board">
     <TicTac name="0" />
     <TicTac name="1" />
@@ -64,6 +97,7 @@ export function Board() {
     <TicTac name="6" />
     <TicTac name="7" />
     <TicTac name="8" />
+    </div>
     </div>
   );
 }

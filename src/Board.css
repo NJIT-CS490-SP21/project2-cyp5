@@ -1,11 +1,11 @@
 .board {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    font-size: 60px;
-    color: red;
-    font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  font-size: 60px;
+  color: black;
+  font-weight: bold;
 	width: 300px; /* Total horizontal dimensions */
 	height: 300px; /* Total vertical dimensions */
 	display: grid; /* Enables CSS Grid */ 
@@ -14,5 +14,12 @@
 }
 
 .box {
-  border: 3px solid black; /* Shows the lines in the CSS grid */
+  border: 3px solid red; /* Shows the lines in the CSS grid */
+}
+
+h1{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
 }
