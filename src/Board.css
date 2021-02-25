@@ -23,3 +23,25 @@ h1{
   margin-right: auto;
   justify-content: center;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: montserrat, sans-serif;
+}
+ .App{
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: orange;
+ }
+ form{
+   display:block; 
+   position: relative;
+}
+
+.error{
+  color: red;
+}
+ 
