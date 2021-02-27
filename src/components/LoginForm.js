@@ -10,9 +10,9 @@ function LoginForm({Login, error}) {
     }
     return(
         <form onSubmit={submitHandler}>
+            <h1>React - Tic Tac Toe!</h1>
+            <h3>Login below to access the game.</h3><br></br><br></br>
             <div class="form-inner">
-                <h1>React - Tic Tac Toe!</h1>
-                <h3>Login below to access the game.</h3><br></br>
                 {(error != "") ? (<div class="error">{error}</div>) : ""}
                 <div class="form-group">
                     <lable htmlFor="name">Name:</lable>

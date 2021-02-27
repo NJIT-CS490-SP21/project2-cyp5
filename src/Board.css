@@ -1,20 +1,33 @@
 .board {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  font-size: 60px;
-  color: black;
-  font-weight: bold;
-	width: 300px; /* Total horizontal dimensions */
-	height: 300px; /* Total vertical dimensions */
-	display: grid; /* Enables CSS Grid */ 
-	grid-template-columns: repeat(3, 1fr); /* Total horizontal space broken into 3 columns */
-  grid-template-rows: repeat(3, 1fr); /* Total vertical space broken into 3 rows */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    font-size: 60px;
+    color: cyan;
+    font-weight: bold;
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    font-family: "Brush Script MT";
+    gap: 5px;
 }
 
 .box {
-  border: 3px solid red; /* Shows the lines in the CSS grid */
+    border: 3px solid #05445E;
+    border-radius: 11px;
+    border-block-height: 5px;
+    border-top: -14px;
+    box-shadow: -3px 0px 3px 1px rgb(0 0 0 / 68%);
+    background-color: rgba(255, 255, 255, 36%);
+    transition: all .2s ease-in-out;
+}
+
+.box:hover{
+  box-shadow: 0 0 11px rgb(33 33 33 / 20%);
+  transform: scale(1.05);
 }
 
 h1{
@@ -22,21 +35,21 @@ h1{
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
+  color:black;
+  text-shadow: 2px 2px #A9A9A9;
 }
 * {/* select all elements*/
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: montserrat, sans-serif;
 }
- .App{
-   height: 100vh;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   background-color: orange;
-   
- }
+.App {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
  form{
    display:block; 
    position: relative;
@@ -48,4 +61,13 @@ h1{
 
 h3,lable{
   font-size: 15px;
+  color:cyan;
+}
+body{
+  background-image: url(https://wallpapershome.com/images/wallpapers/pattern-3840x2160-4k-5k-wallpaper-8k-blue-background-274.jpg);
+  background-size: cover;
+}
+
+wrap{
+  color:cyan;
 }

@@ -138,7 +138,8 @@ export function Board() {
           </div>
           <div>
           <br></br>
-             User's List:
+            <wrap>
+             User's List:</wrap>
             {userList.map((item, index) => (
               <li>{item}</li>
             ))}
