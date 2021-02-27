@@ -27,7 +27,6 @@ def on_connect():
     print('User connected!')
 
 
-
 @socketio.on('ticTac')
 def ticTac(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'chat' event from the server to all clients except for
@@ -41,6 +40,16 @@ def user(data): # data is whatever arg you pass in your emit call on client
     # the client that emmitted the event that triggered this function
     socketio.emit('user', names, broadcast=True, include_self=True)
     
+    
+@socketio.on('remove_user')
+def remove_user(data): # data is whatever arg you pass in your emit call on client
+    names.remove(data)
+    print(names)
+    # This emits the 'chat' event from the server to all clients except for
+    # the client that emmitted the event that triggered this function
+    socketio.emit('remove_user', names, broadcast=True, include_self=True)
+    
+
 # When a client disconnects from this Socket connection, this function is run
 @socketio.on('disconnect')
 def on_disconnect():

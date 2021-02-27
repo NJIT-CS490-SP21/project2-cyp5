@@ -14,6 +14,13 @@ export function Board() {
   const [error, setError] = useState("");//catch if details are actually correct
   const [userList, setUserList] = useState([]);
   
+    
+  const winner = calculateWinner(board);
+  let status;
+  if(winner){
+    status = "Winner: " + winner;
+  }
+    //console.log(winner);
 
   const Login = details => {
     if(details.name != ""){
@@ -27,10 +34,15 @@ export function Board() {
   };
   
   const Logout = details => {
+    console.log(user.name);
+    socket.emit('remove_user', user.name);
     setUser({name: ""});
+    
   };
+  
   function TicTac(props){
     function toggleText(){
+      if(winner==null){
       if (user.name === userList[0] || user.name === userList[1]){
         if (board2==0)
         {
@@ -49,22 +61,21 @@ export function Board() {
         socket.emit('ticTac', { position: props.name });
     }
     }
+    }
     return (<div class="box" onClick={toggleText}>{board[props.name]}</div>);
   }
   
-  
   let nxtTurn = null;
   useEffect(() => {
+    socket.on('remove_user',(data) => {
+    setUserList(data);
+    });
     socket.on('user', (data) => {
-   setUserList(data);
+    setUserList(data);
+   
     });
   }, []);
-  
-const winner = calculateWinner(board);
-let status;
-if(winner){
-  status = "Winner: " + winner;
-}
+
   
   useEffect(() => {
     socket.on('ticTac', (data) => {
@@ -84,7 +95,10 @@ if(winner){
     });
   }, [board]);
   
-  
+  function reset(){
+    let empty_board = ['','','','','','','','',''];
+    
+  }
   
   return (
     <div class="App">
@@ -114,6 +128,7 @@ if(winner){
               <li>{item}</li>
             ))}
           </div>
+        <button onClick={reset}>Reset Board</button>
         <button onClick={Logout}>Logout</button>
         </div>
         ) : (<h2>
