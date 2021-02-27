@@ -14,6 +14,8 @@ will be assigned as Player 'O' who plays the second turn. Any subsequent users w
     2. Player O's username
     3. Spectator's username
     4. Winner of the game if any (Player X or Player O)
+5. When the game ends, Player X and Player O will have the option to click a button to play again which will reset the board for all players
+in the session. 
 
 ## Requirements
 1. `npm install`
