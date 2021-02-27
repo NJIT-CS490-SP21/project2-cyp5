@@ -13,7 +13,6 @@ export function calculateWinner(squares) {
 		[2, 4, 6],
 	];
 	for (let i = 0; i < lines.length; i++) {
-		
 		const [a,b,c] = lines[i];
 		//console.log(squares[a]);
 		//console.log(squares[b]);

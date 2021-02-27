@@ -56,7 +56,7 @@ export function Board() {
   let nxtTurn = null;
   useEffect(() => {
     socket.on('user', (data) => {
-    setUserList((prevList) => [...prevList, data.name ]);
+   setUserList(data);
     });
   }, []);
   
