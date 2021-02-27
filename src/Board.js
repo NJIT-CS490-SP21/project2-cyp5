@@ -79,6 +79,10 @@ export function Board() {
   
   useEffect(() => {
     socket.on('ticTac', (data) => {
+      if(data.ret){
+        setBoard(data.ret);
+      }
+      else{
       if (board2==0)
       {
         nxtTurn = 'X';
@@ -91,13 +95,24 @@ export function Board() {
       }
       let array = [...board];
       array[data.position] = nxtTurn;
-      setBoard(array);
+      setBoard(array);}
     });
   }, [board]);
   
   function reset(){
-    let empty_board = ['','','','','','','','',''];
-    
+    const reset_board = ['','','','','','','','',''];
+    setBoard(reset_board);
+    socket.emit('ticTac',{ret:reset_board});
+  }
+  
+  function Reset(){
+    if (user.name === userList[0] || user.name === userList[1]){//restricts spectators to click reset button
+      return(<button onClick={reset}>Reset Board</button>)
+      
+    }
+    else{
+      return(<div></div>);
+    }
   }
   
   return (
@@ -128,7 +143,7 @@ export function Board() {
               <li>{item}</li>
             ))}
           </div>
-        <button onClick={reset}>Reset Board</button>
+        <Reset />
         <button onClick={Logout}>Logout</button>
         </div>
         ) : (<h2>
