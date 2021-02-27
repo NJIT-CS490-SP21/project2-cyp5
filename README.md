@@ -3,7 +3,7 @@
 This project is to build a live multiplayer game in the browser. This is a project based on the famous Tic Tac Toe game!. The goal of this project is to build 
 a complex web app with more client-server interaction and database persistence.
 
-##Features
+## Features
 1. Multiple users can enter this  game page from different browser tabs and view the same live game!
 2. Users will first be prompted to input their username without any required passwords and click “Login”. Upon clicking, 
 they will have officially “logged in” and will be able to view the actual Tic Tac Toe game.
@@ -28,7 +28,6 @@ will be assigned as Player 'O' who plays the second turn. Any subsequent users w
 3. Preview web page in browser '/'
 
 ## Deploy to Heroku
-*Don't do the Heroku step for assignments, you only need to deploy for Project 2*
 1. Create a Heroku app: `heroku create --buildpack heroku/python`
 2. Add nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
 3. Push to Heroku: `git push heroku main`
