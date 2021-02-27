@@ -23,7 +23,7 @@ h1{
   margin-right: auto;
   justify-content: center;
 }
-* {
+* {/* select all elements*/
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -45,6 +45,6 @@ h1{
   color: red;
 }
 
-h3{
+h3,lable{
   font-size: 15px;
 }
