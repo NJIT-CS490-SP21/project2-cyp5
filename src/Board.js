@@ -122,7 +122,8 @@ export function Board() {
         <h1>React - Tic Tac Toe!</h1>
         <h3>Welcome, <span>{user.name}</span></h3><br></br>
         <b> {status} </b>
-        {winner !== null? <b></b>: <b>{status}</b>}
+        {winner !== null? <b></b>: <b>{status}</b>}<br></br>
+        <div class="mainboard">
         <div class="mainapp">
           <div class="board">
           <TicTac name="0" />
@@ -136,15 +137,18 @@ export function Board() {
           <TicTac name="8" />
           </div>
           </div>
-          <div>
+          <div class="userlist">
           <br></br>
             <wrap>
-             User's List:</wrap>
+             Current User's List:<br></br></wrap>
             {userList.map((item, index) => (
               <li>{item}</li>
             ))}
           </div>
+          </div>
+        <div>
         <Reset />
+        </div>
         <button onClick={Logout}>Logout</button>
         </div>
         ) : (<h2>

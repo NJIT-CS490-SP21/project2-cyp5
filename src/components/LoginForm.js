@@ -15,8 +15,8 @@ function LoginForm({Login, error}) {
             <div class="form-inner">
                 {(error != "") ? (<div class="error">{error}</div>) : ""}
                 <div class="form-group">
-                    <lable htmlFor="name">Name:</lable>
-                    <input type="text" name="name" id="name"onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
+                    <lable htmlFor="name">Username:</lable>
+                    <input type="text" name="name" class ="inputbox" id="name"onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
                     {/* Anytime it is change, a function is called (onChange) which passes through the event which holds the value */}
                 </div>
                 <input type="submit" value="Login" />

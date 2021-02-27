@@ -4,7 +4,8 @@
     margin-right: auto;
     justify-content: center;
     font-size: 60px;
-    color: cyan;
+    color:#7CFC00;
+    text-shadow: 3px 3px #A52A2A;
     font-weight: bold;
     width: 300px;
     height: 300px;
@@ -14,6 +15,12 @@
     font-family: "Brush Script MT";
     gap: 5px;
 }
+ .mainboard{
+   display:grid;
+   grid-template-columns: 305px 200px;
+   margin:10px;
+ }
+
 
 .box {
     border: 3px solid #05445E;
@@ -35,8 +42,8 @@ h1{
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
-  color:black;
-  text-shadow: 2px 2px #A9A9A9;
+  color:#FF4500;
+  text-shadow: 2px 2px #FFA500;
 }
 * {/* select all elements*/
   margin: 0;
@@ -61,7 +68,8 @@ h1{
 
 h3,lable{
   font-size: 15px;
-  color:cyan;
+  color:#DAA520;
+  text-shadow: 1px 1px #A52A2A;
 }
 body{
   background-image: url(https://wallpapershome.com/images/wallpapers/pattern-3840x2160-4k-5k-wallpaper-8k-blue-background-274.jpg);
@@ -69,5 +77,23 @@ body{
 }
 
 wrap{
-  color:cyan;
+  text:bold;
+  color:#DAA520;
+  text-shadow: 1px 1px #A52A2A;
+}
+
+inputbox{
+  height: 5px;
+  width: 5px;
+}
+
+li,b{
+  color:#7CFC00;
+  text-shadow: 1px 1px #A52A2A;
+}
+
+exit{
+  display:grid;
+   grid-template-columns: 305px 200px;
+   margin:10px;
 }
