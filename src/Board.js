@@ -13,14 +13,13 @@ export function Board() {
   const [user, setUser] = useState({name: ""});
   const [error, setError] = useState("");//catch if details are actually correct
   const [userList, setUserList] = useState([]);
-  const [nextTurn,setNextTurn] = useState('X');
     
   const winner = calculateWinner(board);
-  let status;
+  let winner_checker;
+  let draw_checker;
   if(winner){
-    status = "Winner is Player " + winner;
+    winner_checker = "Winner is Player " + winner;
   }
-    //console.log(winner);
 
   const Login = details => {
     if(details.name != ""){
@@ -83,51 +82,6 @@ export function Board() {
         array[props.name] = nxtTurn;
         setBoard(array);
         socket.emit('ticTac', { position: props.name });}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     }
     }
     return (<div class="box" onClick={toggleText}>{board[props.name]}</div>);
@@ -140,11 +94,9 @@ export function Board() {
     });
     socket.on('user', (data) => {
     setUserList(data);
-   
     });
   }, []);
 
-  
   useEffect(() => {
     socket.on('ticTac', (data) => {
       if(data.ret){
@@ -189,8 +141,7 @@ export function Board() {
         <div class="welcome">
         <h1>React - Tic Tac Toe!</h1>
         <h3>Welcome, <span>{user.name}</span></h3><br></br>
-        <b> {status} </b>
-        {winner !== null? <b></b>: <b>{status}</b>}<br></br>
+        <b> {winner_checker} </b>
         <div class="mainboard">
         <div class="mainapp">
           <div class="board">

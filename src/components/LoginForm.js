@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 function LoginForm({Login, error}) {
     const [details, setDetails] = useState({name:""});
     
-    const submitHandler = e => {
+    const clickHandler = e => {
         e.preventDefault(); 
         Login(details);
     }
     return(
-        <form onSubmit={submitHandler}>
+        <form onSubmit={clickHandler}>
             <h1>React - Tic Tac Toe!</h1>
             <h3>Login below to access the game.</h3><br></br><br></br>
             <div class="form-inner">
