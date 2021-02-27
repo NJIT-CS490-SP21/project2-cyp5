@@ -1,4 +1,19 @@
-# Flask and create-react-app
+# Project 2 Milestone 1
+## React - Tic Tac Toe
+This project is to build a live multiplayer game in the browser. This is a project based on the famous Tic Tac Toe game!. The goal of this project is to build 
+a complex web app with more client-server interaction and database persistence.
+
+##Features
+1. Multiple users can enter this  game page from different browser tabs and view the same live game!
+2. Users will first be prompted to input their username without any required passwords and click “Login”. Upon clicking, 
+they will have officially “logged in” and will be able to view the actual Tic Tac Toe game.
+3. The first Player that logs in using the link will be assigned as Player 'X' who plays the first turn. The second Player who joins
+will be assigned as Player 'O' who plays the second turn. Any subsequent users will be Spectators who can only watch and can't play any moves.
+4. The user interface page currently shows the following information and will update them live:
+    1. Player X's username
+    2. Player O's username
+    3. Spectator's username
+    4. Winner of the game if any (Player X or Player O)
 
 ## Requirements
 1. `npm install`
