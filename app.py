@@ -24,10 +24,7 @@ def index(filename):
 def on_connect():
     print('User connected!')
 
-# When a client disconnects from this Socket connection, this function is run
-@socketio.on('disconnect')
-def on_disconnect():
-    print('User disconnected!')
+
 
 @socketio.on('ticTac')
 def ticTac(data): # data is whatever arg you pass in your emit call on client
@@ -42,7 +39,11 @@ def user(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('user', data, broadcast=True, include_self=False)
-
+# When a client disconnects from this Socket connection, this function is run
+@socketio.on('disconnect')
+def on_disconnect():
+    print('User disconnected!')
+    
 # Note that we don't call app.run anymore. We call socketio.run with app arg
 socketio.run(
     app,

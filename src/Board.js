@@ -14,9 +14,7 @@ export function Board() {
   const [error, setError] = useState("");//catch if details are actually correct
   const [userList, setUserList] = useState([]);
   
-  //console.log(board);
-  //const winner = calculateWinner(board);
-  //console.log(winner);
+
   const Login = details => {
     if(details.name != ""){
     setUser({name: details.name});
@@ -28,11 +26,9 @@ export function Board() {
     }
   };
   
-  
   const Logout = details => {
     setUser({name: ""});
   };
-  
   function TicTac(props){
     function toggleText(){
       if (user.name === userList[0] || user.name === userList[1]){
@@ -57,7 +53,6 @@ export function Board() {
   }
   
   
-  
   let nxtTurn = null;
   useEffect(() => {
     socket.on('user', (data) => {
@@ -65,16 +60,22 @@ export function Board() {
     });
   }, []);
   
+const winner = calculateWinner(board);
+let status;
+if(winner){
+  status = "Winner: " + winner;
+}
+  
   useEffect(() => {
     socket.on('ticTac', (data) => {
       if (board2==0)
       {
-        nxtTurn = new String('X');
+        nxtTurn = 'X';
         setBoard2(prevTurn => (prevTurn = 1));
       }
       else
       {
-        nxtTurn = new String('O');
+        nxtTurn = 'O';
         setBoard2(prevTurn => (prevTurn = 0));
       }
       let array = [...board];
@@ -83,11 +84,6 @@ export function Board() {
     });
   }, [board]);
   
-  const winner = calculateWinner(board);
-  let status;
-  if(winner){
-    status = "Winner: " + winner;
-  }
   
   
   return (
