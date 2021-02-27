@@ -38,12 +38,13 @@
 }
 
 h1{
+  font-size: 60px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
   color:#FF4500;
-  text-shadow: 2px 2px #FFA500;
+  text-shadow: 3px 3px #FFA500;
 }
 * {/* select all elements*/
   margin: 0;
@@ -93,7 +94,5 @@ li,b{
 }
 
 exit{
-  display:grid;
-   grid-template-columns: 305px 200px;
-   margin:10px;
+ 
 }

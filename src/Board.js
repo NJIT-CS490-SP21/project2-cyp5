@@ -13,12 +13,12 @@ export function Board() {
   const [user, setUser] = useState({name: ""});
   const [error, setError] = useState("");//catch if details are actually correct
   const [userList, setUserList] = useState([]);
-  
+  const [nextTurn,setNextTurn] = useState('X');
     
   const winner = calculateWinner(board);
   let status;
   if(winner){
-    status = "Winner: " + winner;
+    status = "Winner is Player " + winner;
   }
     //console.log(winner);
 
@@ -43,7 +43,13 @@ export function Board() {
   function TicTac(props){
     function toggleText(){
       if(winner==null){
+        console.log(userList);
       if (user.name === userList[0] || user.name === userList[1]){
+        console.log(user.name);
+        console.log(userList[1]);
+        console.log(board2);
+        if(user.name === userList[0] && board2 == 0)
+        {
         if (board2==0)
         {
           nxtTurn = 'X';
@@ -58,8 +64,70 @@ export function Board() {
         let array = [...board];
         array[props.name] = nxtTurn;
         setBoard(array);
-        socket.emit('ticTac', { position: props.name });
+        socket.emit('ticTac', { position: props.name });}
     }
+    if(user.name === userList[1] && board2 == 1)
+        {
+        if (board2==0)
+        {
+          nxtTurn = 'X';
+          setBoard2(prevTurn => (prevTurn = 1));
+        }
+        else
+        {
+          nxtTurn = 'O';
+          setBoard2(prevTurn => (prevTurn = 0));
+        }
+        
+        let array = [...board];
+        array[props.name] = nxtTurn;
+        setBoard(array);
+        socket.emit('ticTac', { position: props.name });}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }
     }
     return (<div class="box" onClick={toggleText}>{board[props.name]}</div>);
