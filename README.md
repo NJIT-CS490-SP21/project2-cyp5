@@ -41,5 +41,6 @@ components instead of class components. I used different online resources such a
 helped me understand on how to use the state hook, effect hook and the rules of the hooks.
 
 * I was also having trouble where if a user just leaves the username blank and tries to login then it would go through. To solve this problem I 
-
+created a new state called ` const [error, setError] = useState("")` to  catch if details are actually correct and passed the error message in
+setError to check if the input box is left empty or not. 
 
