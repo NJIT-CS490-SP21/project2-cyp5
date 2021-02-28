@@ -53,3 +53,6 @@ using this app have to make sure to click the logout button after each section.<
 * For future I want to add a feature where if a win is detected currently it prints out if PlayerX or PlayerO won. I want to print out the username
 of the player on win it winner output.
 
+## Attempted extra credits
+1. Added a Logout button where if a user chicks it, then the user gets removed from the user's list displayed on the User Interface.
+2. Also, did a bit of CSS styling on the board.
