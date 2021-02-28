@@ -33,3 +33,10 @@ in the session.
 1. Create a Heroku app: `heroku create --buildpack heroku/python`
 2. Add nodejs buildpack: `heroku buildpacks:add --index 1 heroku/nodejs`
 3. Push to Heroku: `git push heroku main`
+
+## Technical Problems
+What are the technical issues you encountered with your project? How did you fix them?
+* In the begining, I was having a hard time understanding the Hooks since this project was to be written only using functional 
+components instead of class components. I used different online resources such as [Hooks](https://reactjs.org/docs/hooks-overview.html) which
+helped me understand on how to use the state hook, effect hook and the rules of the hooks.
+
