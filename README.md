@@ -45,14 +45,17 @@ created a new state called ` const [error, setError] = useState("")` to  catch i
 setError to check if the input box is left empty or not. 
 
 ## Known Problems
-* A current know problem that I have in my app is when a user logs in with the username, then the username gets appended to the names list that
+* Firstly, a current know problem that I have in my app is when a user logs in with the username, then the username gets appended to the names list that
 I have made in my app.py. I have added a logout button on the UI when clicked it clears the names in the username list. If the logout button is 
 not clicked by the user after a section then their names will remain in the users list and the next user will able to see the previous user. <b>User's 
 using this app have to make sure to click the logout button after each section.</b>
+
+* Secondly, It is taking more time to load the app when clicking on the heroku app link. So sometimes when Player X makes a move on one tab'
+it might take some time to reflect that on Player's O tab or on the spectators tab.
 
 * For future I want to add a feature where if a win is detected currently it prints out if PlayerX or PlayerO won. I want to print out the username
 of the player on win it winner output.
 
 
 ## Link to my heroku app
-[Heroku](https://cryptic-peak-11823.herokuapp.com/)
+[React-Tic Tac Toe](https://cryptic-peak-11823.herokuapp.com/)
