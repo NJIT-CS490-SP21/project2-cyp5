@@ -40,3 +40,6 @@ What are the technical issues you encountered with your project? How did you fix
 components instead of class components. I used different online resources such as [Hooks](https://reactjs.org/docs/hooks-overview.html) which
 helped me understand on how to use the state hook, effect hook and the rules of the hooks.
 
+* I was also having trouble where if a user just leaves the username blank and tries to login then it would go through. To solve this problem I 
+
+

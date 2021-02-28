@@ -42,11 +42,7 @@ export function Board() {
   function TicTac(props){
     function toggleText(){
       if(winner==null){
-        console.log(userList);
       if (user.name === userList[0] || user.name === userList[1]){
-        console.log(user.name);
-        console.log(userList[1]);
-        console.log(board2);
         if(user.name === userList[0] && board2 == 0)
         {
         if (board2==0)
