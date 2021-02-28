@@ -48,7 +48,8 @@ setError to check if the input box is left empty or not.
 * A current know problem that I have in my app is when a user logs in with the username, then the username gets appended to the names list that
 I have made in my app.py. I have added a logout button on the UI when clicked it clears the names in the username list. If the logout button is 
 not clicked by the user after a section then their names will remain in the users list and the next user will able to see the previous user. <b>User 
-using this app have to make sure to click the logout button after each section.<b>
+using this app have to make sure to click the logout button after each section.</b>
 
-* For future I want to add 
+* For future I want to add a feature where if a win is detected currently it prints out if PlayerX or PlayerO won. I want to print out the username
+of the player on win it winner output.
 
