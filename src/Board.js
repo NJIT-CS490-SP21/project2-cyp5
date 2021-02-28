@@ -33,7 +33,6 @@ export function Board() {
   };
   
   const Logout = details => {
-    console.log(user.name);
     socket.emit('remove_user', user.name);
     setUser({name: ""});
     

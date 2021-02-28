@@ -44,3 +44,11 @@ helped me understand on how to use the state hook, effect hook and the rules of 
 created a new state called ` const [error, setError] = useState("")` to  catch if details are actually correct and passed the error message in
 setError to check if the input box is left empty or not. 
 
+## Known Problems
+* A current know problem that I have in my app is when a user logs in with the username, then the username gets appended to the names list that
+I have made in my app.py. I have added a logout button on the UI when clicked it clears the names in the username list. If the logout button is 
+not clicked by the user after a section then their names will remain in the users list and the next user will able to see the previous user. <b>User 
+using this app have to make sure to click the logout button after each section.<b>
+
+* For future I want to add 
+
