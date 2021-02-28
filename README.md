@@ -54,5 +54,5 @@ using this app have to make sure to click the logout button after each section.<
 of the player on win it winner output.
 
 
-##Link to my heroku app
+## Link to my heroku app
 [Heroku](https://cryptic-peak-11823.herokuapp.com/)
