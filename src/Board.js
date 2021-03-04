@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import './Board.css';
-import { useState, useRef,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import io from 'socket.io-client';
 import LoginForm from './components/LoginForm.js';
 import {calculateWinner} from './components/Winner.js';
@@ -16,13 +16,12 @@ export function Board() {
     
   const winner = calculateWinner(board);
   let winner_checker;
-  let draw_checker;
   if(winner){
     winner_checker = "Winner is Player " + winner;
   }
 
   const Login = details => {
-    if(details.name != ""){
+    if(details.name !== ""){
     setUser({name: details.name});
     setUserList((prevList) => [...prevList, details.name]);
     socket.emit('user', {name: details.name});
@@ -42,9 +41,9 @@ export function Board() {
     function toggleText(){
       if(winner==null){
       if (user.name === userList[0] || user.name === userList[1]){
-        if(user.name === userList[0] && board2 == 0)
+        if(user.name === userList[0] && board2 === 0)
         {
-        if (board2==0)
+        if (board2===0)
         {
           nxtTurn = 'X';
           setBoard2(prevTurn => (prevTurn = 1));
@@ -60,9 +59,9 @@ export function Board() {
         setBoard(array);
         socket.emit('ticTac', { position: props.name });}
     }
-    if(user.name === userList[1] && board2 == 1)
+    if(user.name === userList[1] && board2 === 1)
         {
-        if (board2==0)
+        if (board2===0)
         {
           nxtTurn = 'X';
           setBoard2(prevTurn => (prevTurn = 1));
@@ -98,7 +97,7 @@ export function Board() {
         setBoard(data.ret);
       }
       else{
-      if (board2==0)
+      if (board2===0)
       {
         nxtTurn = 'X';
         setBoard2(prevTurn => (prevTurn = 1));
@@ -132,7 +131,7 @@ export function Board() {
   
   return (
     <div class="App">
-      {(user.name != "") ? (
+      {(user.name !== "") ? (
         <div class="welcome">
         <h1>React - Tic Tac Toe!</h1>
         <h3>Welcome, <span>{user.name}</span></h3><br></br>
