@@ -17,9 +17,9 @@ db = SQLAlchemy(app)
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
 import models
-User=models.user_class(db)
-x=User(username='wow')
-print(x)
+#User=models.user_class(db)
+#x=User(username='wow')
+#print(x)
 
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -42,6 +42,7 @@ def on_connect():
     print('User connected!')
     score_board = []
     all_people = models.user_class(db)
+    print(all_people)
     for person in all_people:
         score_board.append(person.username)
     print(score_board)
