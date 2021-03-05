@@ -20,6 +20,12 @@ export function Board() {
   let winner_checker;
   if(winner){
     winner_checker = "Winner is Player " + winner;
+    if (winner === 'X' && user.name === userList[0]){
+      socket.emit('results',{'win':userList[0],'lose':userList[1]})
+    }
+    else if (winner === 'O' && user.name === userList[0]){
+      socket.emit('results',{'win':userList[1],'lose':userList[0]})
+    }
   }
 
   const Login = details => {

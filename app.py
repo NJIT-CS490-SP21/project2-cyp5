@@ -66,6 +66,18 @@ def user(data): # data is whatever arg you pass in your emit call on client
     print(score)
     socketio.emit('score_board',{'users': score_board})
     socketio.emit('score',{'score': score})
+    
+    
+@socketio.on('results')
+def results(data):
+    outcome1 = models.Person.query.filter_by(username=data['win']).first()
+    outcome1.score = outcome1.score + 1
+    print(outcome1.score)
+    outcome2 = models.Person.query.filter_by(username=data['lose']).first()
+    outcome2.score = outcome2.score - 1
+    print(outcome2.score)
+    db.session.commit()
+    #socketio.emit('results', data, broadcast=True, include_self=False)
 
 @socketio.on('remove_user')
 def remove_user(data): # data is whatever arg you pass in your emit call on client
