@@ -17,7 +17,7 @@
 }
 .mainboard{
    display:grid;
-   grid-template-columns: 305px 200px;
+   grid-template-columns: 305px 200px 118px 74px;
    margin:10px;
  }
 .box {
@@ -48,6 +48,7 @@ h1{
   box-sizing: border-box;
 }
 .App {
+    zoom: 150%;
     height: 100vh;
     width: 100%;
     display: flex;

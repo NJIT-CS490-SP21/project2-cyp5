@@ -177,7 +177,6 @@ export function Board() {
               <li>{item}</li>
             ))}
           </div>
-          </div>
           <div class="scoreBoard">
           <br></br>
             <wrap>
@@ -194,6 +193,7 @@ export function Board() {
             {result.map((item, index) => (
               <li>{item}</li>
             ))}
+          </div>
           </div>
           
         <div>
