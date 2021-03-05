@@ -13,6 +13,8 @@ export function Board() {
   const [user, setUser] = useState({name: ""});
   const [error, setError] = useState("");//catch if details are actually correct
   const [userList, setUserList] = useState([]);
+  const [scoreBord, scoreBoardList] = useState([]);
+  const [result, setResultList] = useState([]);
     
   const winner = calculateWinner(board);
   let winner_checker;
@@ -89,6 +91,17 @@ export function Board() {
     socket.on('user', (data) => {
     setUserList(data);
     });
+    
+    socket.on('score_board',(data) => {
+    console.log('Score board list received');
+    console.log(data);
+    scoreBoardList(data.users);
+    });
+    
+    socket.on('score',(data) => {
+    setResultList(data.score);
+    });
+    
   }, []);
 
   useEffect(() => {
@@ -159,6 +172,24 @@ export function Board() {
             ))}
           </div>
           </div>
+          <div class="scoreBoard">
+          <br></br>
+            <wrap>
+             ScoreBoard:<br></br></wrap>
+            {scoreBord.map((item, index) => (
+              <li>{item}</li>
+            ))}
+          </div>
+          
+          <div class="result">
+          <br></br>
+            <wrap>
+             Result:<br></br></wrap>
+            {result.map((item, index) => (
+              <li>{item}</li>
+            ))}
+          </div>
+          
         <div>
         <Reset />
         </div>

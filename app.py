@@ -37,14 +37,7 @@ def index(filename):
 @socketio.on('connect')
 def on_connect():
     print('User connected!')
-    score_board = []
-    all_people = models.Person.query.all()
-    print(all_people)
-    for person in all_people:
-        score_board.append(person.username)
-    print(score_board)
-    socketio.emit('score_board',{'users': score_board})
-
+    
 @socketio.on('ticTac')
 def ticTac(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'chat' event from the server to all clients except for
@@ -57,6 +50,22 @@ def user(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('user', names, broadcast=True, include_self=True)
+    score_board = []
+    score = []
+    exists = db.session.query(models.Person.username).filter_by(username=data['name']).first() is not None #StackOF
+    if not exists:
+        new_user = models.Person(username=data['name'], score=100)
+        db.session.add(new_user)
+        db.session.commit()
+    all_people = models.Person.query.all()
+    print(all_people)
+    for person in all_people:
+        score_board.append(person.username)
+        score.append(person.score)
+    print(score_board)
+    print(score)
+    socketio.emit('score_board',{'users': score_board})
+    socketio.emit('score',{'score': score})
 
 @socketio.on('remove_user')
 def remove_user(data): # data is whatever arg you pass in your emit call on client
