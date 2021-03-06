@@ -19,19 +19,26 @@ export function Board() {
   const winner = calculateWinner(board);
   const[winner_checker, setWinner_checker] = useState('');
   
+  const [ nxtTurn, setNxtTurn ] = useState('X');
+  
   useEffect(() => {
-    if(winner){
-      setWinner_checker("Winner is Player " + winner);
+    console.log(winner);
+    if(winner != null){
+      //setWinner_checker("Winner is Player " + winner);
       if (winner === 'X' && user.name === userList[0]){
-        socket.emit('results',{'win':userList[0],'lose':userList[1]})
+        socket.emit('results',{'win':userList[0],'lose':userList[1]});
       }
       else if (winner === 'O' && user.name === userList[0]){
-        socket.emit('results',{'win':userList[1],'lose':userList[0]})
+        socket.emit('results',{'win':userList[1],'lose':userList[0]});
       }
     }
   }, [winner]);
   
-
+  let winner_checker2;
+  if(winner){
+    winner_checker2 = "Winner is Player " + winner;
+  }
+  
   const Login = details => {
     if(details.name !== ""){
     setUser({name: details.name});
@@ -44,56 +51,48 @@ export function Board() {
   };
   
   const Logout = details => {
+    reset();
     socket.emit('remove_user', user.name);
     setUser({name: ""});
-    
   };
   
-  function TicTac(props){
-    function toggleText(){
+  function toggleText(index){
       if(winner==null){
-      if (user.name === userList[0] || user.name === userList[1]){
-        if(user.name === userList[0] && board2 === 0)
-        {
-        if (board2===0)
-        {
-          nxtTurn = 'X';
-          setBoard2(prevTurn => (prevTurn = 1));
-        }
-        else
-        {
-          nxtTurn = 'O';
-          setBoard2(prevTurn => (prevTurn = 0));
-        }
-        
-        let array = [...board];
-        array[props.name] = nxtTurn;
-        setBoard(array);
-        socket.emit('ticTac', { position: props.name });}
+        //if (user.name === userList[0] || user.name === userList[1]){
+          if(user.name === userList[0] && nxtTurn === 'X')
+          {
+            setBoard((prevList) => {
+              let newList = [...prevList];
+              newList[index] = nxtTurn;
+              return newList;
+            });
+            
+            setNxtTurn(prevTurn => prevTurn === 'X' ? 'O' : 'X');
+            
+            socket.emit('ticTac', { position: index, turn: nxtTurn });
+            
+          }
+     // }
+          else if(user.name === userList[1] && nxtTurn === 'O')
+          {
+            setBoard((prevList) => {
+              let newList = [...prevList];
+              newList[index] = nxtTurn;
+              return newList;
+            });
+            
+            setNxtTurn(prevTurn => prevTurn === 'X' ? 'O' : 'X');
+            
+            socket.emit('ticTac', { position: index, turn: nxtTurn });
+          }
+      }
     }
-    if(user.name === userList[1] && board2 === 1)
-        {
-        if (board2===0)
-        {
-          nxtTurn = 'X';
-          setBoard2(prevTurn => (prevTurn = 1));
-        }
-        else
-        {
-          nxtTurn = 'O';
-          setBoard2(prevTurn => (prevTurn = 0));
-        }
-        
-        let array = [...board];
-        array[props.name] = nxtTurn;
-        setBoard(array);
-        socket.emit('ticTac', { position: props.name });}
-    }
-    }
-    return (<div class="box" onClick={toggleText}>{board[props.name]}</div>);
+  
+  function TicTac(props)
+  {
+    return (<div class="box" onClick={() => toggleText(props.name)}>{board[props.name]}</div>);
   }
   
-  let nxtTurn = null;
   useEffect(() => {
     socket.on('remove_user',(data) => {
     setUserList(data);
@@ -103,8 +102,6 @@ export function Board() {
     });
     
     socket.on('score_board',(data) => {
-    console.log('Score board list received');
-    console.log(data);
     scoreBoardList(data.users);
     });
     
@@ -117,27 +114,25 @@ export function Board() {
   useEffect(() => {
     socket.on('ticTac', (data) => {
       if(data.ret){
+        //console.log('---------------------?')
         setBoard(data.ret);
-      }
-      else{
-      if (board2===0)
-      {
-        nxtTurn = 'X';
-        setBoard2(prevTurn => (prevTurn = 1));
       }
       else
       {
-        nxtTurn = 'O';
-        setBoard2(prevTurn => (prevTurn = 0));
+        //setNxtTurn(data.turn);
+        setNxtTurn(prevTurn => prevTurn === 'X' ? 'O' : 'X');
+        
+        setBoard((prevList) => {
+          let newList = [...prevList]
+          newList[data.position] = data.turn;
+          return newList;
+        });
       }
-      let array = [...board];
-      array[data.position] = nxtTurn;
-      setBoard(array);}
     });
-  }, [board]);
+  }, []);
   
   function reset(){
-    const reset_board = ['','','','','','','','',''];
+    const reset_board = [null,null,null,null,null,null,null,null,null];
     setBoard(reset_board);
     socket.emit('ticTac',{ret:reset_board});
   }
@@ -158,7 +153,8 @@ export function Board() {
         <div class="welcome">
         <h1>React - Tic Tac Toe!</h1>
         <h3>Welcome, <span>{user.name}</span></h3><br></br>
-        <b> {winner_checker} </b>
+        <b> {winner_checker2}</b>
+        <h1>{nxtTurn}'s Turn</h1>
         <div class="mainboard">
         <div class="mainapp">
           <div class="board">

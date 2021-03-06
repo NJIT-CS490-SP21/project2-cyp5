@@ -4,6 +4,7 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
+import sqlalchemy
 
 load_dotenv(find_dotenv()) #This is to load your env variables from .env
 app = Flask(__name__, static_folder='./build/static')
@@ -57,13 +58,15 @@ def user(data): # data is whatever arg you pass in your emit call on client
         new_user = models.Person(username=data['name'], score=100)
         db.session.add(new_user)
         db.session.commit()
-    all_people = models.Person.query.all()
-    print(all_people)
-    for person in all_people:
+    
+    query_obj = db.session.query(models.Person)
+    desc_expression = sqlalchemy.sql.expression.desc(models.Person.score)
+    order_by_query = query_obj.order_by(desc_expression)
+
+    for person in order_by_query:
         score_board.append(person.username)
         score.append(person.score)
-    print(score_board)
-    print(score)
+        
     socketio.emit('score_board',{'users': score_board})
     socketio.emit('score',{'score': score})
     
@@ -79,11 +82,15 @@ def results(data):
     outcome2.score = outcome2.score - 1
     print(outcome2.score)
     db.session.commit()
-    all_people = models.Person.query.all()
-    print(all_people)
-    for person in all_people:
+    
+    query_obj = db.session.query(models.Person)
+    desc_expression = sqlalchemy.sql.expression.desc(models.Person.score)
+    order_by_query = query_obj.order_by(desc_expression)
+
+    for person in order_by_query:
         score_board.append(person.username)
         score.append(person.score)
+        
     socketio.emit('score_board',{'users': score_board})
     socketio.emit('score',{'score': score})
     #socketio.emit('results', score, score_board, broadcast=True, include_self=False)

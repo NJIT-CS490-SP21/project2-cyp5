@@ -48,7 +48,7 @@ h1{
   box-sizing: border-box;
 }
 .App {
-    zoom: 150%;
+    zoom: 95%;
     height: 100vh;
     width: 100%;
     display: flex;
