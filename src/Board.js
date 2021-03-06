@@ -58,7 +58,6 @@ export function Board() {
   
   function toggleText(index){
       if(winner==null){
-        //if (user.name === userList[0] || user.name === userList[1]){
           if(user.name === userList[0] && nxtTurn === 'X')
           {
             setBoard((prevList) => {
@@ -72,7 +71,6 @@ export function Board() {
             socket.emit('ticTac', { position: index, turn: nxtTurn });
             
           }
-     // }
           else if(user.name === userList[1] && nxtTurn === 'O')
           {
             setBoard((prevList) => {
@@ -114,12 +112,10 @@ export function Board() {
   useEffect(() => {
     socket.on('ticTac', (data) => {
       if(data.ret){
-        //console.log('---------------------?')
         setBoard(data.ret);
       }
       else
       {
-        //setNxtTurn(data.turn);
         setNxtTurn(prevTurn => prevTurn === 'X' ? 'O' : 'X');
         
         setBoard((prevList) => {
