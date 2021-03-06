@@ -52,7 +52,7 @@ def user(data): # data is whatever arg you pass in your emit call on client
     socketio.emit('user', names, broadcast=True, include_self=True)
     score_board = []
     score = []
-    exists = db.session.query(models.Person.username).filter_by(username=data['name']).first() is not None #StackOF
+    exists = db.session.query(models.Person.username).filter_by(username=data['name']).first()#StackOF
     if not exists:
         new_user = models.Person(username=data['name'], score=100)
         db.session.add(new_user)
@@ -70,14 +70,23 @@ def user(data): # data is whatever arg you pass in your emit call on client
     
 @socketio.on('results')
 def results(data):
-    outcome1 = models.Person.query.filter_by(username=data['win']).first()
+    score_board = []
+    score = []
+    outcome1 = db.session.query(models.Person).filter_by(username=data['win']).first()
     outcome1.score = outcome1.score + 1
     print(outcome1.score)
-    outcome2 = models.Person.query.filter_by(username=data['lose']).first()
+    outcome2 = db.session.query(models.Person).filter_by(username=data['lose']).first()
     outcome2.score = outcome2.score - 1
     print(outcome2.score)
     db.session.commit()
-    #socketio.emit('results', data, broadcast=True, include_self=False)
+    all_people = models.Person.query.all()
+    print(all_people)
+    for person in all_people:
+        score_board.append(person.username)
+        score.append(person.score)
+    socketio.emit('score_board',{'users': score_board})
+    socketio.emit('score',{'score': score})
+    #socketio.emit('results', score, score_board, broadcast=True, include_self=False)
 
 @socketio.on('remove_user')
 def remove_user(data): # data is whatever arg you pass in your emit call on client

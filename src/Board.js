@@ -17,16 +17,20 @@ export function Board() {
   const [result, setResultList] = useState([]);
     
   const winner = calculateWinner(board);
-  let winner_checker;
-  if(winner){
-    winner_checker = "Winner is Player " + winner;
-    if (winner === 'X' && user.name === userList[0]){
-      socket.emit('results',{'win':userList[0],'lose':userList[1]})
+  const[winner_checker, setWinner_checker] = useState('');
+  
+  useEffect(() => {
+    if(winner){
+      setWinner_checker("Winner is Player " + winner);
+      if (winner === 'X' && user.name === userList[0]){
+        socket.emit('results',{'win':userList[0],'lose':userList[1]})
+      }
+      else if (winner === 'O' && user.name === userList[0]){
+        socket.emit('results',{'win':userList[1],'lose':userList[0]})
+      }
     }
-    else if (winner === 'O' && user.name === userList[0]){
-      socket.emit('results',{'win':userList[1],'lose':userList[0]})
-    }
-  }
+  }, [winner]);
+  
 
   const Login = details => {
     if(details.name !== ""){
