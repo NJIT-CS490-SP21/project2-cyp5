@@ -80,7 +80,7 @@ inputbox{
   height: 5px;
   width: 5px;
 }
-li,b{
+list,b{
   color:#7CFC00;
   text-shadow: 1px 1px #A52A2A;
 }

@@ -174,15 +174,15 @@ export function Board() {
             <wrap>
              Current User's List:<br></br></wrap>
             {userList.map((item, index) => (
-              <li>{item}</li>
+              <div><list>{item}</list></div>
             ))}
           </div>
           <div class="scoreBoard">
           <br></br>
             <wrap>
-             ScoreBoard:<br></br></wrap>
+             Score Board:<br></br></wrap>
             {scoreBord.map((item, index) => (
-              <li>{item}</li>
+              <div><list>{item}</list></div>
             ))}
           </div>
           
@@ -191,7 +191,7 @@ export function Board() {
             <wrap>
              Result:<br></br></wrap>
             {result.map((item, index) => (
-              <li>{item}</li>
+              <div><list>{item}</list></div>
             ))}
           </div>
           </div>
