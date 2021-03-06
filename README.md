@@ -34,6 +34,15 @@ in the session.
 6. See the config vars set by Heroku for you: `heroku config`. Copy paste the value for DATABASE_URL.
 7. Create .env file in your directory. Add value of `DATABASE_URL` by entering this in the .env file: `export DATABASE_URL='copy-paste-value-in-here'`
 
+## Use Python code to update our newly created database
+1. In the terminal, go to the directory with `app.py` and run the command `python` which opens up an interactive session.
+2. Now intinalize a new database and add some dummy values in it using SQLAlchemy functions. Then type in these Python lines one by one:
+```
+>> from app import db
+>> import models
+>> db.create_all()
+```
+
 ## Run Application
 1. Run command in terminal (in your project directory): `python app.py`
 2. Run command in another terminal, `cd` into the project directory, and run `npm run start`
