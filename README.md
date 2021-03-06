@@ -1,4 +1,4 @@
-# Project 2 Milestone 1
+# Project 2 Milestone 2
 ## React - Tic Tac Toe
 This project is to build a live multiplayer game in the browser. This is a project based on the famous Tic Tac Toe game!. The goal of this project is to build 
 a complex web app with more client-server interaction and database persistence.
@@ -20,9 +20,19 @@ in the session.
 ## Requirements
 1. `npm install`
 2. `pip install -r requirements.txt`
+3. `pip install python-dotenv`
 
 ## Setup
 1. Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
+
+## Create a new database on Heroku and connect to the code
+1. In your terminal, go to the directory with `app.py`
+2. Now set up a new remote Postgres database with Heroku and connect to it locally.
+3. Login and fill creds: `heroku login -i`
+4. Create a new Heroku app: `heroku create`
+5. Create a new remote DB on your Heroku app: `heroku addons:create heroku-postgresql:hobby-dev` (If that doesn't work, add a `-a {your-app-name}` to the end of the command, no braces)
+6. See the config vars set by Heroku for you: `heroku config`. Copy paste the value for DATABASE_URL.
+7. Create .env file in your directory. Add value of `DATABASE_URL` by entering this in the .env file: `export DATABASE_URL='copy-paste-value-in-here'`
 
 ## Run Application
 1. Run command in terminal (in your project directory): `python app.py`
