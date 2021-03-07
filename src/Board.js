@@ -17,12 +17,10 @@ export function Board() {
   const [result, setResultList] = useState([]);
   const[show,setShow]=useState(false);  
   const winner = calculateWinner(board);
-  const[winner_checker, setWinner_checker] = useState('');
   
   const [ nxtTurn, setNxtTurn ] = useState('X');
   
   useEffect(() => {
-    console.log(winner);
     if(winner != null){
       //setWinner_checker("Winner is Player " + winner);
       if (winner === 'X' && user.name === userList[0]){
@@ -124,7 +122,7 @@ export function Board() {
         setNxtTurn(prevTurn => prevTurn === 'X' ? 'O' : 'X');
         
         setBoard((prevList) => {
-          let newList = [...prevList]
+          let newList = [...prevList];
           newList[data.position] = data.turn;
           return newList;
         });
@@ -140,18 +138,13 @@ export function Board() {
   
   function Reset(){
     if (user.name === userList[0] || user.name === userList[1]){//restricts spectators to click reset button
-      return(<button onClick={reset}>Reset Board</button>)
+      return(<button onClick={reset}>Reset Board</button>);
       
     }
     else{
       return(<div></div>);
     }
   }
-  
-  function leader(){
-    
-  }
-  
   return (
     <div class="App">
       {(user.name !== "") ? (
@@ -182,10 +175,6 @@ export function Board() {
               <div><list>{item}</list></div>
             ))}
           </div>
-          
-          
-         
-          
           <div class="scoreBoard">
           <button onClick={()=>setShow(!show)}>LeaderBoard</button>
           {
@@ -207,10 +196,7 @@ export function Board() {
             : null
           } 
           </div>
-          
-          
         </div>
-          
         <div>
         <Reset />
         </div>
