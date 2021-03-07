@@ -15,7 +15,8 @@ will be assigned as Player 'O' who plays the second turn. Any subsequent users w
     3. Spectator's username
     4. Winner of the game if any (Player X or Player O)
 5. When the game ends, Player X and Player O will have the option to click a button to play again which will reset the board for all players
-in the session. 
+in the session.
+6. If one user is taking his/her turn then the other user won't be able to click on the board unless the opposite player takes his/her turn.
 
 ## Requirements
 1. `npm install`
@@ -91,8 +92,15 @@ components instead of class components. I used different online resources such a
 helped me understand on how to use the state hook, effect hook and the rules of the hooks.
 
 * I was also having trouble where if a user just leaves the username blank and tries to login then it would go through. To solve this problem I 
-created a new state called ` const [error, setError] = useState("")` to  catch if details are actually correct and passed the error message in
-setError to check if the input box is left empty or not. 
+created a new state called `const [error, setError] = useState("")` to  catch if details are actually correct and passed the error message in
+setError to check if the input box is left empty or not.
+
+* Another problem I had was while working on milestone 2. I was having issues when I was restarting the board. I was updating the board after a game using `const [board2,setBoard2] = useState(0);`
+The problem was after the game was over it kept updating the useState whith the old game moves and because of that I was having issues with my database scores. I solved this issue by using
+by adding global variables and functions.
+
+* In milestone 2, I also at first forgot to `git remote rm heroku` to get rid  of the existing remote repo from milestone 1. To fix this problem first I did `git remote rm heroku`,
+then I did `heroku create`. This steps gave me a new app and a new Database url for the app. Then I had to follow the above steps from `Use Python code to update our newly created database`.
 
 ## Known Problems
 * Firstly, a current know problem that I have in my app is when a user logs in with the username, then the username gets appended to the names list that
@@ -103,7 +111,9 @@ using this app have to make sure to click the logout button after each section.<
 * Secondly, It is taking more time to load the app when clicking on the heroku app link. So sometimes when Player X makes a move on one tab'
 it might take some time to reflect that on Player's O tab or on the spectators tab.
 
-* For future I want to add a feature where if a win is detected currently it prints out if PlayerX or PlayerO won. I want to print out the username
+* For future I wold like to add more CSS and add animation when a winner wins in my live board.
+
+* Also, I want to add a feature where if a win is detected currently it prints out if PlayerX or PlayerO won. I want to print out the username
 of the player on win it winner output.
 
 
