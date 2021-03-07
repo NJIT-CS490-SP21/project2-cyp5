@@ -82,10 +82,11 @@ inputbox{
 }
 list,b{
   color:#7CFC00;
-  text-shadow: 1px 1px #A52A2A;
+  text-shadow: 3px 3px #A52A2A;
 }
 
 ul{
+  font-size: 30px;
   display: inline-block;
   *display: inline;
   zoom: 1;
