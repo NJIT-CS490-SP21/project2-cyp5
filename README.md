@@ -35,13 +35,28 @@ in the session.
 7. Create .env file in your directory. Add value of `DATABASE_URL` by entering this in the .env file: `export DATABASE_URL='copy-paste-value-in-here'`
 
 ## Use Python code to update our newly created database
-1. In the terminal, go to the directory with `app.py` and run the command `python` which opens up an interactive session.
-2. Now intinalize a new database and add some dummy values in it using SQLAlchemy functions. Then type in these Python lines one by one:
+8. In the terminal, go to the directory with `app.py` and run the command `python` which opens up an interactive session.
+9. Now intinalize a new database and add some dummy values in it using SQLAlchemy functions. Then type in these Python lines one by one:
 ```
 >> from app import db
 >> import models
 >> db.create_all()
+>> admin = models.Person(username='admin', score=100)
+>> guest = models.Person(username='guest', score=100)
+>> db.session.add(admin)
+>> db.session.add(guest)
+>> db.session.commit()
 ```
+10. Now let us make sure that our data was added successfully by the queires we wrote above. In the same `python` session, type the following lines:
+```
+>> models.Person.query.all()
+[<Person u'admin'>, <Person u'guest'>] # output
+>> models.Person.query.filter_by(username='admin').first()
+<Person u'admin'> # output
+```
+11. Now we have to make sure that this was written to our Heroku remote database.
+12. We can connect to our Heroku remote database by typing: `heroku pg:psql`.
+13. `\d` to list all our tables. `person` should be in there now.
 
 ## Run Application
 1. Run command in terminal (in your project directory): `python app.py`
