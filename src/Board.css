@@ -17,7 +17,7 @@
 }
 .mainboard{
    display:grid;
-   grid-template-columns: 305px 200px 118px 74px;
+   grid-template-columns: 305px 200px 389px;
    margin:10px;
  }
 .box {
@@ -85,3 +85,10 @@ list,b{
   text-shadow: 1px 1px #A52A2A;
 }
 
+ul{
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  padding: 20px;
+
+}

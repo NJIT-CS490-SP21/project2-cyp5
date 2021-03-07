@@ -15,7 +15,7 @@ export function Board() {
   const [userList, setUserList] = useState([]);
   const [scoreBord, scoreBoardList] = useState([]);
   const [result, setResultList] = useState([]);
-    
+  const[show,setShow]=useState(false);  
   const winner = calculateWinner(board);
   const[winner_checker, setWinner_checker] = useState('');
   
@@ -51,13 +51,17 @@ export function Board() {
   };
   
   const Logout = details => {
+    if (user.name === userList[0] || user.name === userList[1])
+    {
     reset();
+    }
     socket.emit('remove_user', user.name);
     setUser({name: ""});
   };
   
   function toggleText(index){
       if(winner==null){
+          if (board[index] === ''){
           if(user.name === userList[0] && nxtTurn === 'X')
           {
             setBoard((prevList) => {
@@ -82,6 +86,7 @@ export function Board() {
             setNxtTurn(prevTurn => prevTurn === 'X' ? 'O' : 'X');
             
             socket.emit('ticTac', { position: index, turn: nxtTurn });
+          }
           }
       }
     }
@@ -143,6 +148,10 @@ export function Board() {
     }
   }
   
+  function leader(){
+    
+  }
+  
   return (
     <div class="App">
       {(user.name !== "") ? (
@@ -173,24 +182,34 @@ export function Board() {
               <div><list>{item}</list></div>
             ))}
           </div>
+          
+          
+         
+          
           <div class="scoreBoard">
-          <br></br>
-            <wrap>
-             Score Board:<br></br></wrap>
-            {scoreBord.map((item, index) => (
-              <div><list>{item}</list></div>
-            ))}
+          <button onClick={()=>setShow(!show)}>LeaderBoard</button>
+          {
+            show ?
+            <div classname="score_list">
+              <ul>
+              <wrap>Names:<br></br></wrap>
+              {scoreBord.map((item, index) => (
+              <div><list><center>{item}</center></list></div>
+              ))}
+              </ul>
+              <ul>
+                <wrap>Scores:<br></br></wrap>
+                {result.map((item, index) => (
+                  <div><list><center>{item}</center></list></div>
+                ))}
+              </ul>
+            </div>
+            : null
+          } 
           </div>
           
-          <div class="result">
-          <br></br>
-            <wrap>
-             Result:<br></br></wrap>
-            {result.map((item, index) => (
-              <div><list>{item}</list></div>
-            ))}
-          </div>
-          </div>
+          
+        </div>
           
         <div>
         <Reset />
