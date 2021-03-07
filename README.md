@@ -25,7 +25,7 @@ in the session.
 ## Setup
 1. Run `echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local` in the project directory
 
-## Create a new database on Heroku and connect to the code
+### Create a new database on Heroku and connect to the code
 1. In your terminal, go to the directory with `app.py`
 2. Now set up a new remote Postgres database with Heroku and connect to it locally.
 3. Login and fill creds: `heroku login -i`
@@ -34,7 +34,7 @@ in the session.
 6. See the config vars set by Heroku for you: `heroku config`. Copy paste the value for DATABASE_URL.
 7. Create .env file in your directory. Add value of `DATABASE_URL` by entering this in the .env file: `export DATABASE_URL='copy-paste-value-in-here'`
 
-## Use Python code to update our newly created database
+### Use Python code to update our newly created database
 8. In the terminal, go to the directory with `app.py` and run the command `python` which opens up an interactive session.
 9. Now intinalize a new database and add some dummy values in it using SQLAlchemy functions. Then type in these Python lines one by one:
 ```
