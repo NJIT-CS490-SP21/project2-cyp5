@@ -58,10 +58,13 @@ export function Board() {
   };
   
   function toggleText(index){
+      console.log(nxtTurn);
+      console.log(winner);
       if(winner==null){
+          console.log(board[index]);
           if (board[index] === ''){
           if(user.name === userList[0] && nxtTurn === 'X')
-          {
+          { 
             setBoard((prevList) => {
               let newList = [...prevList];
               newList[index] = nxtTurn;
@@ -131,7 +134,7 @@ export function Board() {
   }, []);
   
   function reset(){
-    const reset_board = [null,null,null,null,null,null,null,null,null];
+    const reset_board = ['','','','','','','','',''];
     setBoard(reset_board);
     socket.emit('ticTac',{ret:reset_board});
   }
