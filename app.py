@@ -7,7 +7,7 @@ from dotenv import load_dotenv, find_dotenv
 import sqlalchemy
 
 load_dotenv(find_dotenv()) #This is to load your env variables from .env
-app = Flask(__name__, static_folder='./build/static')
+app = Flask(__name__, static_folder='./build/static') # pylint: disable=C0103
 
 # Point SQLAlchemy to your Heroku database
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
-import models
+import models # pylint: disable=C0413
 db.create_all()
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -38,7 +38,7 @@ def index(filename):
 @socketio.on('connect')
 def on_connect():
     print('User connected!')
-    
+
 @socketio.on('ticTac')
 def ticTac(data): # data is whatever arg you pass in your emit call on client
     # This emits the 'ticTac' event from the server to all clients except for
@@ -53,12 +53,12 @@ def user(data): # data is whatever arg you pass in your emit call on client
     socketio.emit('user', names, broadcast=True, include_self=True)
     score_board = []
     score = []
-    exists = db.session.query(models.Person.username).filter_by(username=data['name']).first()#StackOF
+    exists = db.session.query(models.Person.username).filter_by(username=data['name']).first()
     if not exists:
         new_user = models.Person(username=data['name'], score=100)
         db.session.add(new_user)
         db.session.commit()
-    
+
     query_object = db.session.query(models.Person)
     descending_order = sqlalchemy.sql.expression.desc(models.Person.score)
     query_by_order = query_object.order_by(descending_order)
@@ -66,10 +66,10 @@ def user(data): # data is whatever arg you pass in your emit call on client
     for person in query_by_order:
         score_board.append(person.username)
         score.append(person.score)
-        
-    socketio.emit('score_board',{'users': score_board})
-    socketio.emit('score',{'score': score})
-    
+
+    socketio.emit('score_board', {'users': score_board})
+    socketio.emit('score', {'score': score})
+
 @socketio.on('results')
 def results(data):
     score_board = []
@@ -81,7 +81,7 @@ def results(data):
     outcome2.score = outcome2.score - 1
     print(outcome2.score)
     db.session.commit()
-    
+
     query_object = db.session.query(models.Person)
     descending_order = sqlalchemy.sql.expression.desc(models.Person.score)
     query_by_order = query_object.order_by(descending_order)
@@ -89,9 +89,9 @@ def results(data):
     for person in query_by_order:
         score_board.append(person.username)
         score.append(person.score)
-        
-    socketio.emit('score_board',{'users': score_board})
-    socketio.emit('score',{'score': score})
+
+    socketio.emit('score_board', {'users': score_board})
+    socketio.emit('score', {'score': score})
 
 @socketio.on('remove_user')
 def remove_user(data): # data is whatever arg you pass in your emit call on client
