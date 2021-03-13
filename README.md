@@ -1,4 +1,4 @@
-# Project 2 Milestone 2
+# Project 2
 
 ## React - Tic Tac Toe
 
@@ -139,4 +139,4 @@ What are the technical issues you encountered with your project? How did you fix
 
 ## Link to my heroku app
 
-[React-Tic Tac Toe](https://cryptic-peak-11823.herokuapp.com/)
+[React-Tic Tac Toe](https://enigmatic-everglades-52801.herokuapp.com/)
