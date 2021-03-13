@@ -1,95 +1,97 @@
 .board {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    font-size: 60px;
-    color:#7CFC00;
-    text-shadow: 3px 3px #A52A2A;
-    font-weight: bold;
-    width: 300px;
-    height: 300px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    font-family: "Brush Script MT";
-    gap: 5px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  font-size: 60px;
+  color: #7cfc00;
+  text-shadow: 3px 3px #a52a2a;
+  font-weight: bold;
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  font-family: "Brush Script MT";
+  gap: 5px;
 }
-.mainboard{
-   display:grid;
-   grid-template-columns: 305px 200px 389px;
-   margin:10px;
- }
+.mainboard {
+  display: grid;
+  grid-template-columns: 305px 200px 389px;
+  margin: 10px;
+}
 .box {
-    border: 3px solid #05445E;
-    border-radius: 11px;
-    border-block-height: 5px;
-    border-top: -14px;
-    box-shadow: -3px 0px 3px 1px rgb(0 0 0 / 68%);
-    background-color: rgba(255, 255, 255, 36%);
-    transition: all .2s ease-in-out;
+  border: 3px solid #05445e;
+  border-radius: 11px;
+  border-block-height: 5px;
+  border-top: -14px;
+  box-shadow: -3px 0px 3px 1px rgb(0 0 0 / 68%);
+  background-color: rgba(255, 255, 255, 36%);
+  transition: all 0.2s ease-in-out;
 }
-.box:hover{
+.box:hover {
   box-shadow: 0 0 11px rgb(33 33 33 / 20%);
   transform: scale(1.05);
 }
-h1{
+h1 {
   font-size: 60px;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
-  color:#FF4500;
-  text-shadow: 3px 3px #FFA500;
+  color: #ff4500;
+  text-shadow: 3px 3px #ffa500;
 }
-* {/* select all elements*/
+* {
+  /* select all elements*/
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 .App {
-    zoom: 95%;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  zoom: 95%;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
- form{
-   display:block; 
-   position: relative;
+form {
+  display: block;
+  position: relative;
 }
-.error{
+.error {
   color: red;
 }
-h3,lable{
+h3,
+lable {
   font-size: 15px;
-  color:#DAA520;
-  text-shadow: 1px 1px #A52A2A;
+  color: #daa520;
+  text-shadow: 1px 1px #a52a2a;
 }
-body{
+body {
   background-image: url(https://wallpapershome.com/images/wallpapers/pattern-3840x2160-4k-5k-wallpaper-8k-blue-background-274.jpg);
   background-size: cover;
 }
-wrap{
-  text:bold;
-  color:#DAA520;
-  text-shadow: 1px 1px #A52A2A;
+wrap {
+  text: bold;
+  color: #daa520;
+  text-shadow: 1px 1px #a52a2a;
 }
-inputbox{
+inputbox {
   height: 5px;
   width: 5px;
 }
-list,b{
-  color:#7CFC00;
-  text-shadow: 3px 3px #A52A2A;
+list,
+b {
+  color: #7cfc00;
+  text-shadow: 3px 3px #a52a2a;
 }
 
-ul{
+ul {
   font-size: 30px;
   display: inline-block;
   *display: inline;
   zoom: 1;
   padding: 20px;
-
 }
