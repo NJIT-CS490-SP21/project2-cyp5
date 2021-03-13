@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import io from "socket.io-client";
-import "./Board.css";
-import { Board } from "./Board.js";
+import './Board.css';
+import React from 'react';
+import { Board } from './Board';
 
 function App() {
   return <Board />;

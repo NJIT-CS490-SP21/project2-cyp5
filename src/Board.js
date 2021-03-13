@@ -1,124 +1,131 @@
-import React from "react";
-import "./App.css";
-import "./Board.css";
-import { useState, useEffect } from "react";
-import io from "socket.io-client";
-import LoginForm from "./components/LoginForm.js";
-import { calculateWinner } from "./components/Winner.js";
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import './Board.css';
+import PropTypes from 'prop-types';
+
+import io from 'socket.io-client';
+import LoginForm from './components/LoginForm';
+import { calculateWinner } from './components/Winner';
 
 const socket = io(); // Connects to socket connection
 export function Board() {
-  const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
-  const [board2, setBoard2] = useState(0);
-  const [user, setUser] = useState({ name: "" });
-  const [error, setError] = useState(""); //catch if details are actually correct
+  const [board, setBoard] = useState(['', '', '', '', '', '', '', '', '']);
+  const [user, setUser] = useState({ name: '' });
+  const [error, setError] = useState(''); // catch if details are actually correct
   const [userList, setUserList] = useState([]);
   const [scoreBord, scoreBoardList] = useState([]);
   const [result, setResultList] = useState([]);
   const [show, setShow] = useState(false);
   const winner = calculateWinner(board);
 
-  const [nxtTurn, setNxtTurn] = useState("X");
+  const [nxtTurn, setNxtTurn] = useState('X');
 
   useEffect(() => {
     if (winner != null) {
-      //setWinner_checker("Winner is Player " + winner);
-      if (winner === "X" && user.name === userList[0]) {
-        socket.emit("results", { win: userList[0], lose: userList[1] });
-      } else if (winner === "O" && user.name === userList[0]) {
-        socket.emit("results", { win: userList[1], lose: userList[0] });
+      // setWinner_checker("Winner is Player " + winner);
+      if (winner === 'X' && user.name === userList[0]) {
+        socket.emit('results', { win: userList[0], lose: userList[1] });
+      } else if (winner === 'O' && user.name === userList[0]) {
+        socket.emit('results', { win: userList[1], lose: userList[0] });
       }
     }
   }, [winner]);
 
-  let winner_checker2;
+  let WinnerChecker2;
   if (winner) {
-    winner_checker2 = "Winner is Player " + winner;
+    WinnerChecker2 = `Winner is Player ${winner}`;
   }
 
   const Login = (details) => {
-    if (details.name !== "") {
+    if (details.name !== '') {
       setUser({ name: details.name });
       setUserList((prevList) => [...prevList, details.name]);
-      socket.emit("user", { name: details.name });
+      socket.emit('user', { name: details.name });
     } else {
-      setError("Please Enter a name to proceed!");
+      setError('Please Enter a name to proceed!');
     }
   };
 
+  function reset() {
+    const ResetBoard = ['', '', '', '', '', '', '', '', ''];
+    setBoard(ResetBoard);
+    socket.emit('ticTac', { ret: ResetBoard });
+  }
+
   const Logout = (details) => {
+    console.log(details);
     if (user.name === userList[0] || user.name === userList[1]) {
       reset();
     }
-    socket.emit("remove_user", user.name);
-    setUser({ name: "" });
+    socket.emit('remove_user', user.name);
+    setUser({ name: '' });
   };
 
   function toggleText(index) {
-    console.log(nxtTurn);
-    console.log(winner);
     if (winner == null) {
-      console.log(board[index]);
-      if (board[index] === "") {
-        if (user.name === userList[0] && nxtTurn === "X") {
+      if (board[index] === '') {
+        if (user.name === userList[0] && nxtTurn === 'X') {
           setBoard((prevList) => {
-            let newList = [...prevList];
+            const newList = [...prevList];
             newList[index] = nxtTurn;
             return newList;
           });
 
-          setNxtTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"));
+          setNxtTurn((prevTurn) => (prevTurn === 'X' ? 'O' : 'X'));
 
-          socket.emit("ticTac", { position: index, turn: nxtTurn });
-        } else if (user.name === userList[1] && nxtTurn === "O") {
+          socket.emit('ticTac', { position: index, turn: nxtTurn });
+        } else if (user.name === userList[1] && nxtTurn === 'O') {
           setBoard((prevList) => {
-            let newList = [...prevList];
+            const newList = [...prevList];
             newList[index] = nxtTurn;
             return newList;
           });
 
-          setNxtTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"));
+          setNxtTurn((prevTurn) => (prevTurn === 'X' ? 'O' : 'X'));
 
-          socket.emit("ticTac", { position: index, turn: nxtTurn });
+          socket.emit('ticTac', { position: index, turn: nxtTurn });
         }
       }
     }
   }
 
   function TicTac(props) {
-    return (
-      <div class="box" onClick={() => toggleText(props.name)}>
-        {board[props.name]}
-      </div>
-    );
+    const { name } = props;
+    if (name >= 0) {
+      return (
+        <div role="button" tabIndex={0} className="box" onClick={() => toggleText(name)} onKeyDown={() => toggleText(name)}>
+          {board[name]}
+        </div>
+      );
+    }
   }
 
   useEffect(() => {
-    socket.on("remove_user", (data) => {
+    socket.on('remove_user', (data) => {
       setUserList(data);
     });
-    socket.on("user", (data) => {
+    socket.on('user', (data) => {
       setUserList(data);
     });
 
-    socket.on("score_board", (data) => {
+    socket.on('score_board', (data) => {
       scoreBoardList(data.users);
     });
 
-    socket.on("score", (data) => {
+    socket.on('score', (data) => {
       setResultList(data.score);
     });
   }, []);
 
   useEffect(() => {
-    socket.on("ticTac", (data) => {
+    socket.on('ticTac', (data) => {
       if (data.ret) {
         setBoard(data.ret);
       } else {
-        setNxtTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"));
+        setNxtTurn((prevTurn) => (prevTurn === 'X' ? 'O' : 'X'));
 
         setBoard((prevList) => {
-          let newList = [...prevList];
+          const newList = [...prevList];
           newList[data.position] = data.turn;
           return newList;
         });
@@ -126,34 +133,34 @@ export function Board() {
     });
   }, []);
 
-  function reset() {
-    const reset_board = ["", "", "", "", "", "", "", "", ""];
-    setBoard(reset_board);
-    socket.emit("ticTac", { ret: reset_board });
-  }
-
   function Reset() {
     if (user.name === userList[0] || user.name === userList[1]) {
-      //restricts spectators to click reset button
-      return <button onClick={reset}>Reset Board</button>;
-    } else {
-      return <div></div>;
+      // restricts spectators to click reset button
+      return <button onClick={reset} type="submit">Reset Board</button>;
     }
+    return <div />;
   }
   return (
-    <div class="App">
-      {user.name !== "" ? (
-        <div class="welcome">
+    <div className="App">
+      {user.name !== '' ? (
+        <div className="welcome">
           <h1>React - Tic Tac Toe!</h1>
           <h3>
-            Welcome, <span>{user.name}</span>
+            Welcome,
+            {' '}
+            <span>{user.name}</span>
           </h3>
-          <br></br>
-          <b> {winner_checker2}</b>
-          <h1>{nxtTurn}'s Turn</h1>
-          <div class="mainboard">
-            <div class="mainapp">
-              <div class="board">
+          <br />
+          <b>
+            {' '}
+            {WinnerChecker2}
+          </b>
+          <h1>
+            {`${nxtTurn}'s Turn`}
+          </h1>
+          <div className="mainboard">
+            <div className="mainapp">
+              <div className="board">
                 <TicTac name="0" />
                 <TicTac name="1" />
                 <TicTac name="2" />
@@ -165,26 +172,28 @@ export function Board() {
                 <TicTac name="8" />
               </div>
             </div>
-            <div class="userlist">
-              <br></br>
+            <div className="userlist">
+              <br />
               <wrap>
-                Current User's List:<br></br>
+                Current Users List:
+                <br />
               </wrap>
-              {userList.map((item, index) => (
+              {userList.map((item) => (
                 <div>
                   <list>{item}</list>
                 </div>
               ))}
             </div>
-            <div class="scoreBoard">
-              <button onClick={() => setShow(!show)}>LeaderBoard</button>
+            <div className="scoreBoard">
+              <button onClick={() => setShow(!show)} type="submit">LeaderBoard</button>
               {show ? (
-                <div classname="score_list">
+                <div className="score_list">
                   <ul>
                     <wrap>
-                      Names:<br></br>
+                      Names:
+                      <br />
                     </wrap>
-                    {scoreBord.map((item, index) => (
+                    {scoreBord.map((item) => (
                       <div>
                         <list>
                           <center>{item}</center>
@@ -194,9 +203,10 @@ export function Board() {
                   </ul>
                   <ul>
                     <wrap>
-                      Scores:<br></br>
+                      Scores:
+                      <br />
                     </wrap>
-                    {result.map((item, index) => (
+                    {result.map((item) => (
                       <div>
                         <list>
                           <center>{item}</center>
@@ -211,7 +221,7 @@ export function Board() {
           <div>
             <Reset />
           </div>
-          <button onClick={Logout}>Logout</button>
+          <button onClick={Logout} type="submit">Logout</button>
         </div>
       ) : (
         <h2>
@@ -221,5 +231,15 @@ export function Board() {
     </div>
   );
 }
+
+Board.propTypes = {
+  // name: PropTypes.string,
+  name: PropTypes.string,
+};
+
+Board.defaultProps = {
+  // name: PropTypes.string,
+  name: PropTypes.string,
+};
 
 export default Board;
