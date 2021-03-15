@@ -65,8 +65,7 @@ def user(data):
     SOCKETIO.emit("user", NAMES, broadcast=True, include_self=True)
     score_board = []
     score = []
-    exists = (DB.session.query(
-        models.Person.username).filter_by(username=data["name"]).first())  # pylint: disable=E1101
+    exists = (DB.session.query(models.Person.username).filter_by(username=data["name"]).first())  # pylint: disable=E1101
     if not exists:
         local = data["name"]
         temp = adding_new_user(local)
@@ -101,12 +100,10 @@ def results(data):
     """ Adds +1 to winner score and -1 to losers score and arranges it in descending order"""
     score_board = []
     score = []
-    outcome1 = (DB.session.query(
-        models.Person).filter_by(username=data["win"]).first())  # pylint: disable=E1101
+    outcome1 = (DB.session.query(models.Person).filter_by(username=data["win"]).first())  # pylint: disable=E1101
     outcome1.score = outcome1.score + 1
     print(outcome1.score)
-    outcome2 = (DB.session.query(
-        models.Person).filter_by(username=data["lose"]).first())  # pylint: disable=E1101
+    outcome2 = (DB.session.query(models.Person).filter_by(username=data["lose"]).first())  # pylint: disable=E1101
     outcome2.score = outcome2.score - 1
     print(outcome2.score)
     DB.session.commit()  # pylint: disable=E1101

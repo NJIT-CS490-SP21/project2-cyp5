@@ -1,15 +1,14 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import App from "./App";
-import Board from "./Board"
-
+import { render, screen, fireEvent } from '@testing-library/react';
+import App from './App';
+import Board from './Board';
 
 const React = require('react');
 
 test('Join button disappears', () => {
-  const result= render(<App />);
-  const temp = screen.getByPlaceholderText('username')
-  fireEvent.change(temp, {target: {value: 'Chirag'}});
-  
+  const result = render(<App />);
+  const temp = screen.getByPlaceholderText('username');
+  fireEvent.change(temp, { target: { value: 'Chirag' } });
+
   const joinButtonElemet = screen.getByText('Login');
   expect(joinButtonElemet).toBeInTheDocument();
   fireEvent.click(joinButtonElemet);
@@ -17,11 +16,10 @@ test('Join button disappears', () => {
   expect(insideLogin).toBeInTheDocument();
 });
 
-
 test('LeaderBoard test', () => {
-  const result= render(<App />);
-  const temp = screen.getByPlaceholderText('username')
-  fireEvent.change(temp, {target: {value: 'Chirag'}});
+  const result = render(<App />);
+  const temp = screen.getByPlaceholderText('username');
+  fireEvent.change(temp, { target: { value: 'Chirag' } });
   const joinButtonElemet = screen.getByText('Login');
   expect(joinButtonElemet).toBeInTheDocument();
   fireEvent.click(joinButtonElemet);
@@ -31,9 +29,9 @@ test('LeaderBoard test', () => {
 });
 
 test('Logout test', () => {
-  const result= render(<App />);
-  const temp = screen.getByPlaceholderText('username')
-  fireEvent.change(temp, {target: {value: 'Chirag'}});
+  const result = render(<App />);
+  const temp = screen.getByPlaceholderText('username');
+  fireEvent.change(temp, { target: { value: 'Chirag' } });
   const joinButtonElemet = screen.getByText('Login');
   expect(joinButtonElemet).toBeInTheDocument();
   fireEvent.click(joinButtonElemet);
