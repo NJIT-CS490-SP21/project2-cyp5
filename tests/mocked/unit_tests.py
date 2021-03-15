@@ -23,16 +23,18 @@ class UpdateUserTestCase(unittest.TestCase):
     def setUp(self):
         self.success_test_params = [
             {
-            KEY_INPUT: "TestUser1", 
-            KEY_EXPECTED: [INITIAL_USERNAME, "TestUser1"]
+                KEY_INPUT: "TestUser1",
+                KEY_EXPECTED: [INITIAL_USERNAME, "TestUser1"]
             },
             {
                 KEY_INPUT: "TestUser2",
                 KEY_EXPECTED: [INITIAL_USERNAME, "TestUser1", "TestUser2"],
             },
             {
-                KEY_INPUT: "TestUser3",
-                KEY_EXPECTED: [INITIAL_USERNAME, "TestUser1", "TestUser2","TestUser3"],
+                KEY_INPUT:
+                "TestUser3",
+                KEY_EXPECTED:
+                [INITIAL_USERNAME, "TestUser1", "TestUser2", "TestUser3"],
             },
         ]
 
@@ -51,7 +53,8 @@ class UpdateUserTestCase(unittest.TestCase):
     def test_success(self):
         for test in self.success_test_params:
             with patch("app.DB.session.add", self.mocked_DB_session_add):
-                with patch("app.DB.session.commit", self.mocked_DB_session_commit):
+                with patch("app.DB.session.commit",
+                           self.mocked_DB_session_commit):
                     with patch("models.Person.query") as mocked_query:
                         mocked_query.all = self.mocked_person_query_all
 

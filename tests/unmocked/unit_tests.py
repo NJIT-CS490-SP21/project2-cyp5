@@ -15,22 +15,28 @@ EXPECTED_OUTPUT = "expected"
 class UpdateUserTestCase(unittest.TestCase):
     """This class is to check if an entered user is displayed
     correctly and displays none if nothing passed"""
-
     def setUp(self):
         self.success_test_params = [
-            {   
-                USER_INPUT: {'win':'Chirag', 'lose':'Raju'}, 
-                EXPECTED_OUTPUT: [107,93],
+            {
+                USER_INPUT: {
+                    'win': 'Chirag',
+                    'lose': 'Raju'
+                },
+                EXPECTED_OUTPUT: [107, 93],
             },
-            
-            {   
-                USER_INPUT: {'win':'Raju', 'lose':'Joe'}, 
-                EXPECTED_OUTPUT: [92,98],
+            {
+                USER_INPUT: {
+                    'win': 'Raju',
+                    'lose': 'Joe'
+                },
+                EXPECTED_OUTPUT: [92, 98],
             },
-            
-            {   
-                USER_INPUT: {'win':'Joe', 'lose':'Chirag'}, 
-                EXPECTED_OUTPUT: [97,108],
+            {
+                USER_INPUT: {
+                    'win': 'Joe',
+                    'lose': 'Chirag'
+                },
+                EXPECTED_OUTPUT: [97, 108],
             },
         ]
 
@@ -41,6 +47,7 @@ class UpdateUserTestCase(unittest.TestCase):
             expected_result = test[EXPECTED_OUTPUT]
             self.assertGreater(actual_result[0], expected_result[0])
             self.assertLess(actual_result[1], expected_result[1])
+
 
 if __name__ == "__main__":
     unittest.main()
