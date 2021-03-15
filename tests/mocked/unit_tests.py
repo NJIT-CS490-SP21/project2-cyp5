@@ -1,5 +1,5 @@
 """
-Mocked Tests
+Mocked Tests to check if the usernames are being added in DB
 """
 import unittest
 import unittest.mock as mock

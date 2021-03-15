@@ -31,7 +31,7 @@ test('LeaderBoard test', () => {
 });
 
 test('Logout test', () => {
-const result= render(<App />);
+  const result= render(<App />);
   const temp = screen.getByPlaceholderText('username')
   fireEvent.change(temp, {target: {value: 'Chirag'}});
   const joinButtonElemet = screen.getByText('Login');
