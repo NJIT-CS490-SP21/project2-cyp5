@@ -36,7 +36,6 @@ SOCKETIO = SocketIO(
 @APP.route('/<path:filename>')
 def index(filename):
     """Send a given data file to qutebrowser.
-
     If a directory is requested, its index.html is sent.
     """
     return send_from_directory('./build', filename)
@@ -65,9 +64,8 @@ def user(data):
     score = []
     exists = DB.session.query(models.Person.username).filter_by(username=data['name']).first()# pylint: disable=E1101
     if not exists:
-        new_user = models.Person(username=data['name'], score=100)
-        DB.session.add(new_user)# pylint: disable=E1101
-        DB.session.commit()# pylint: disable=E1101
+        local=data['name']
+        temp=adding_new_user(local)
 
     query_object = DB.session.query(models.Person)# pylint: disable=E1101
     descending_order = sqlalchemy.sql.expression.desc(models.Person.score)
@@ -79,6 +77,16 @@ def user(data):
 
     SOCKETIO.emit('score_board', {'users': score_board})
     SOCKETIO.emit('score', {'score': score})
+
+def adding_new_user(USERNAME):
+    temp_users = []
+    new_user = models.Person(username=USERNAME, score=100)
+    DB.session.add(new_user)# pylint: disable=E1101
+    DB.session.commit()# pylint: disable=E1101
+    all_people=models.Person.query.all()
+    for person in all_people:
+        temp_users.append(person.username)
+    return temp_users
 
 @SOCKETIO.on('results')
 def results(data):

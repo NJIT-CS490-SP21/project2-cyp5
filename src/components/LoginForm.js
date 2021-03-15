@@ -19,6 +19,7 @@ function LoginForm({ Login, error }) {
         <div className="form-group">
           <lable htmlFor="name">Username:</lable>
           <input
+            placeholder="username"
             type="text"
             name="name"
             className="inputbox"
